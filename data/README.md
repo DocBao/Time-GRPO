@@ -28,17 +28,15 @@ Dataset prefixes are used as follows:
 
 - `dtels_bench_5_granularity_input.jsonl`
 - `dtels_bench_5_granularity_output.jsonl`
-- `dtels_bench_5_granularity_answer_processed.jsonl`
 
-`dtels_bench_5_granularity_answer_processed.jsonl` is the complete processed 5-granularity answer file.
+These files contain 373 records with matching IDs. The input file contains source timelines and the output file contains the corresponding 5-node target timelines.
 
 #### 10-granularity
 
 - `dtels_bench_10_granularity_input.jsonl`
 - `dtels_bench_10_granularity_output.jsonl`
-- `dtels_bench_10_granularity_filtered_gold_reference.jsonl`
 
-The `filtered_gold_reference` file is a corrected/filtered version for experimental use. Records with identified problems in the original DTELS-Bench data were removed. Users should preserve this filename and description when citing or mirroring the release.
+These files contain 362 records with matching IDs. Records identified as problematic in the original DTELS-Bench data were removed from this release, and the output file contains the corresponding 10-node target timelines.
 
 ### CCKS2025
 
@@ -69,7 +67,7 @@ This repository does not override upstream licenses, competition rules, or third
 
 ## Known processing note
 
-The 10-granularity DTELS-Bench gold-reference release excludes records identified as problematic in the original data. The filtered file is intended to make the experimental setting reproducible while avoiding those known erroneous records.
+The 10-granularity DTELS-Bench release excludes records identified as problematic in the original data. The paired input/output files are intended to make the corrected experimental setting reproducible.
 
 ## Version
 

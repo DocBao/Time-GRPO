@@ -1,0 +1,44 @@
+### Model Configuration
+model_name_or_path: model/Qwen3-8B  # Replace with a local model path or Hugging Face ID.
+reward_model: model/Qwen3-8B        # Replace with a local model path or Hugging Face ID.
+trust_remote_code: true
+flash_attn: fa2            # 使用 Flash Attention 2
+bf16: true                 # 开启 bfloat16
+
+### Method Configuration
+stage: ppo                 # 阶段：PPO
+finetuning_type: lora      # 微调方式：LoRA
+lora_target: all           # 作用于所有线性层
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+
+### Dataset Configuration
+# 注意：实际数据加载在 run_ppo.py 中手动完成，这里主要占位以防 LF 校验报错
+dataset_dir: data
+dataset: ppo_dummy_dataset
+
+### PPO Training Configuration
+do_train: true
+do_eval: false
+output_dir: outputs/ppo-star
+learning_rate: 1.0e-5      # PPO 的学习率通常比 SFT 低
+num_train_epochs: 5        # 训练轮数
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 2
+optim: adamw_torch
+max_grad_norm: 1.0
+#ppo_score_norm: true       # 对 Reward 进行归一化，通常有助于收敛
+#whiten_rewards: true       # 对 Advantage 进行白化
+
+### Logging
+logging_steps: 1
+save_steps: 50
+report_to: tensorboard
+
+### Generation Configuration (用于 PPO 采样阶段)
+max_new_tokens: 1024       # 生成的最大长度
+max_length: 8192           # 总长度 (prompt + generation)
+top_k: 50                  # 采样 top_k
+top_p: 0.9                 # 采样 top_p
+temperature: 0.9           # 温度，PPO 需要一定的随机性来探索
